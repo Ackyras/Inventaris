@@ -15,8 +15,7 @@ class PeminjamanController extends Controller
     public function index()
     {
         $today = today('Asia/Jakarta')->format('d-m-Y');
-        dd($today);
         $barang = Barang::paginate(15);
-        return view('peminjaman.index', compact('form_pinjam'));
+        return view('peminjaman.index', compact('barang'));
     }
 }

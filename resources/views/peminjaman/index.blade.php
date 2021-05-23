@@ -39,14 +39,14 @@ List Ruangan
                         <td>{{Carbon\Carbon::createFromFormat('Y-m-d', $items->peminjam->pivot->tgl_pinjam)->format('d-m-Y')  }}</td>
                         <td>{{Carbon\Carbon::createFromFormat('Y-m-d', $items->peminjam->pivot->tgl_kembali)->format('d-m-Y')  }}</td>
                         <td>
-                            @if ($items->peminjaman->pivot->status==true)
-                                @if ()
-
+                            @if ($items->peminjam->pivot->status==true)
+                                @if (($items->peminjam->pivot->tgl_kembali > $today))
+                                    Sedang meminjam(Telat)
                                 @else
-
+                                    Sedang meminjam
                                 @endif
                             @else
-
+                                Selesai meminjam
                             @endif
                         </td>
                         <td>

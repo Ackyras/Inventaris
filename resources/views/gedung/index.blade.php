@@ -23,7 +23,7 @@ List Ruangan
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">No. </th>
-                        <th scope="col">Ruangan</th>
+                        <th scope="col">Nama Gedung</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -31,9 +31,12 @@ List Ruangan
                     @forelse ($gedung as $items)
                     <tr>
                         <td scope="row">{{ $loop->iteration }}</td>
-                        <td>{{ $items->nama }}</td>
-                        <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#data{{$items->id}}">Detail</button>
+                        <td scope="row">{{ $items->nama }}</td>
+                        <td scope="row">
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#data{{$items->id}}">Detail</button>
+                            <a href="{{ route('gedung.edit', $items->id) }}" class="btn btn-info btn-sm">Edit</a>
+                            <a href="{{ route('gedung.destroy', $items->id) }}" class="btn btn-danger btn-sm">Delete</a>
+
                         </td>
                     </tr>
                     <div class="modal fade" id="data{{$items->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,11 +65,11 @@ List Ruangan
                                         <dd>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d-m-Y H:i:s') }}</b></small></dt>
                                     </dl>
                                     <div class="modal-footer">
-                                        <a href="{{ route('barang.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                        <form action="{{ route('barang.destroy', $items->id) }}" method="POST">
+                                        <a href="{{ route('ruangan.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ route('ruangan.destroy', $items->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Yakin ingin menghapus barang(Anda akan menghapus seluruh barang {{$item->nama}} dari ruangan ini)?')" class="btn btn-danger">Hapus</button>
+                                            <button type="submit" onclick="return confirm('Yakin ingin menghapus ruangan ini?(Anda akan menghapus seluruh barang yang ada dari ruangan ini)?')" class="btn btn-danger">Hapus</button>
                                         </form>
                                     </div>
                                     @empty

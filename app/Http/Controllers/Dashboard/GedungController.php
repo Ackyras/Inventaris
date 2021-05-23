@@ -79,6 +79,8 @@ class GedungController extends Controller
     public function edit($id)
     {
         //
+        $gedung = Gedung::find($id);
+        return view('gedung.edit', compact('gedung'));
     }
 
     /**
@@ -88,9 +90,24 @@ class GedungController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
         //
+        $gedung = Gedung::find($id);
+        DB::beginTransaction();
+        try {
+            //code...
+            $gedung->update([
+                'nama'  =>  $req->nama,
+            ]);
+            $gedung->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            throw $th;
+            return redirect()->route('gedung.index')->with('posterr', 'Gagal memperbarui data!');
+        }
+        return redirect()->route('gedung.index')->with('success', 'Berhasil memperbarui data!');
     }
 
     /**

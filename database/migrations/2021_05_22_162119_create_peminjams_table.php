@@ -15,11 +15,7 @@ class CreatePeminjamsTable extends Migration
     {
         Schema::create('peminjams', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_depan');
-            $table->string('nama_belakang');
-            $table->string('nama_lengkap');
-            $table->index(['nama_depan', 'nama_belakang'], 'nama_lengkap');
-            // $table->index();
+            $table->string('nama');
             $table->string('no_id');
             $table->timestamps();
         });

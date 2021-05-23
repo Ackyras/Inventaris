@@ -83,6 +83,8 @@ class RuanganController extends Controller
     public function edit($id)
     {
         //
+        $ruangan = Ruangan::find($id);
+        return view('ruangan.edit', compact('ruangan'));
     }
 
     /**
@@ -92,9 +94,24 @@ class RuanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
         //
+        $ruangan = Ruangan::find($id);
+        DB::beginTransaction();
+        try {
+            //code...
+            $ruangan->update([
+                'nama'  =>  $req->nama,
+            ]);
+            $ruangan->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            //throw $th;
+            return back()->with('posterr', 'Gagal memperbarui data!');
+        }
+        return back()->with('success', 'Berhasil memperbarui data!');
     }
 
     /**

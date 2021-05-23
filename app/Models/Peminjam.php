@@ -12,7 +12,8 @@ class Peminjam extends Model
     protected $table = 'peminjams';
 
     protected $fillable = [
-        ''
+        'nama',
+        'no_id'
     ];
 
     public function barang()

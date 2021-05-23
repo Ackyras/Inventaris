@@ -108,8 +108,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">List Barang yang Dipinjam</a>
-                        <a class="collapse-item" href="register.html">List Peminjam</a>
+                        <a class="collapse-item" href="{{route('peminjaman.index')}}">List Barang yang Dipinjam</a>
                     </div>
                 </div>
             </li>
